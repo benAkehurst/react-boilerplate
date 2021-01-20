@@ -9,13 +9,9 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../store/actions/index';
-import axios from '../../axios-orders';
+import axios from '../../axios-instance';
 
 const BurgerBuilder = (props) => {
-  // constructor(props) {
-  //     super(props);
-  //     this.state = {...}
-  // }
   const [purchasing, setPurchasing] = useState(false);
 
   const dispatch = useDispatch();
@@ -35,7 +31,6 @@ const BurgerBuilder = (props) => {
     () => dispatch(actions.initIngredients()),
     [dispatch]
   );
-  const onInitPurchase = () => dispatch(actions.purchaseInit());
   const onSetAuthRedirectPath = (path) =>
     dispatch(actions.setAuthRedirectPath(path));
 
@@ -68,7 +63,6 @@ const BurgerBuilder = (props) => {
   };
 
   const purchaseContinueHandler = () => {
-    onInitPurchase();
     props.history.push('/checkout');
   };
 

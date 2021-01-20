@@ -1,6 +1,7 @@
 import axios from 'axios';
-
 import * as actionTypes from './actionTypes';
+
+const BASE_URL = 'http://localhost:5000';
 
 export const authStart = () => {
   return {
@@ -11,7 +12,7 @@ export const authStart = () => {
 export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    idToken: token,
+    token: token,
     userId: userId,
   };
 };
@@ -31,37 +32,30 @@ export const logout = () => {
   };
 };
 
-export const checkAuthTimeout = (expirationTime) => {
-  return (dispatch) => {
-    setTimeout(() => {
-      dispatch(logout());
-    }, expirationTime * 1000);
-  };
-};
-
-export const auth = (email, password, isSignup) => {
+export const auth = (email, password, password2, acceptedTerms, isSignup) => {
   return (dispatch) => {
     dispatch(authStart());
-    const authData = {
+    const loginData = {
       email: email,
       password: password,
-      returnSecureToken: true,
     };
-    let url = '';
-    if (!isSignup) {
-      url = '';
-    }
+    const signUpData = {
+      email: email,
+      password: password,
+      password2: password2,
+      acceptedTerms: acceptedTerms,
+    };
+    let url = !isSignup
+      ? `${BASE_URL}/api/v1/auth/login-user`
+      : `${BASE_URL}/api/v1/auth/create-new-user`;
     axios
-      .post(url, authData)
+      .post(url, !isSignup ? loginData : signUpData)
       .then((response) => {
-        const expirationDate = new Date(
-          new Date().getTime() + response.data.expiresIn * 1000
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('userId', response.data.data.uniqueId);
+        dispatch(
+          authSuccess(response.data.data.uniqueId, response.data.data.token)
         );
-        localStorage.setItem('token', response.data.idToken);
-        localStorage.setItem('expirationDate', expirationDate);
-        localStorage.setItem('userId', response.data.localId);
-        dispatch(authSuccess(response.data.idToken, response.data.localId));
-        dispatch(checkAuthTimeout(response.data.expiresIn));
       })
       .catch((err) => {
         dispatch(authFail(err.response.data.error));
@@ -79,21 +73,27 @@ export const setAuthRedirectPath = (path) => {
 export const authCheckState = () => {
   return (dispatch) => {
     const token = localStorage.getItem('token');
-    if (!token) {
+    let tokenStatus = checkTokenValid(token);
+    if (!tokenStatus) {
       dispatch(logout());
     } else {
-      const expirationDate = new Date(localStorage.getItem('expirationDate'));
-      if (expirationDate <= new Date()) {
-        dispatch(logout());
-      } else {
-        const userId = localStorage.getItem('userId');
-        dispatch(authSuccess(token, userId));
-        dispatch(
-          checkAuthTimeout(
-            (expirationDate.getTime() - new Date().getTime()) / 1000
-          )
-        );
-      }
+      const userId = localStorage.getItem('userId');
+      dispatch(authSuccess(token, userId));
     }
   };
+};
+
+const checkTokenValid = (token) => {
+  if (!token) {
+    return false;
+  } else {
+    const tokenValid = axios.get(
+      `${BASE_URL}api/v1/auth/check-token-valid-external/${token}`
+    );
+    if (!tokenValid) {
+      return false;
+    } else {
+      return true;
+    }
+  }
 };
