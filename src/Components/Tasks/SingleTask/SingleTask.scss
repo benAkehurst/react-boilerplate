@@ -1,0 +1,20 @@
+@import '../../../variables.scss';
+
+.singleTaskWrapper {
+  width: $width-80;
+  border: 1px solid black;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+
+  display: inline-grid;
+  grid-template-columns: 70% 5% 25%;
+  grid-template-rows: auto;
+  justify-items: center;
+
+  .singleTaskDateTime {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
