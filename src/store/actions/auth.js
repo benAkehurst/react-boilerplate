@@ -9,11 +9,12 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, tasks) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
     token: token,
     userId: userId,
+    home: tasks,
   };
 };
 
@@ -54,7 +55,11 @@ export const auth = (email, password, password2, isSignup) => {
         localStorage.setItem('token', response.data.data.token);
         localStorage.setItem('userId', response.data.data.uniqueId);
         dispatch(
-          authSuccess(response.data.data.uniqueId, response.data.data.token)
+          authSuccess(
+            response.data.data.uniqueId,
+            response.data.data.token,
+            response.data.data.tasks
+          )
         );
       })
       .catch((error) => {

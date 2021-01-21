@@ -8,8 +8,8 @@ import thunk from 'redux-thunk';
 import './index.scss';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import authReducer from './store/reducers/auth';
+import tasksReducer from './store/reducers/tasks';
 
 const composeEnhancers =
   process.env.NODE_ENV === 'development'
@@ -17,8 +17,8 @@ const composeEnhancers =
     : null || compose;
 
 const rootReducer = combineReducers({
-  burgerBuilder: burgerBuilderReducer,
   auth: authReducer,
+  tasks: tasksReducer,
 });
 
 const store = createStore(
