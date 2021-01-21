@@ -32,7 +32,7 @@ export const logout = () => {
   };
 };
 
-export const auth = (email, password, password2, acceptedTerms, isSignup) => {
+export const auth = (email, password, password2, isSignup) => {
   return (dispatch) => {
     dispatch(authStart());
     const loginData = {
@@ -43,7 +43,7 @@ export const auth = (email, password, password2, acceptedTerms, isSignup) => {
       email: email,
       password: password,
       password2: password2,
-      acceptedTerms: acceptedTerms,
+      acceptedTerms: true,
     };
     let url = !isSignup
       ? `${BASE_URL}/api/v1/auth/login-user`
@@ -57,8 +57,8 @@ export const auth = (email, password, password2, acceptedTerms, isSignup) => {
           authSuccess(response.data.data.uniqueId, response.data.data.token)
         );
       })
-      .catch((err) => {
-        dispatch(authFail(err.response.data.error));
+      .catch((error) => {
+        dispatch(authFail(error.response.data.message));
       });
   };
 };
