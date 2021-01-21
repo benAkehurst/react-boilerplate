@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import './Layout.scss';
 import Aux from '../Aux/Aux';
-import classes from './Layout.scss';
 import Toolbar from '../../components/Navigation/Toolbar/Toolbar';
 import SideDrawer from '../../components/Navigation/SideDrawer/SideDrawer';
 
