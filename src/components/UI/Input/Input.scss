@@ -1,32 +1,35 @@
+@import '../../../variables.scss';
+
 .Input {
   width: 100%;
-  padding: 10px;
+  padding: $spacing-8;
   box-sizing: border-box;
 }
 
 .Label {
   font-weight: bold;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: $spacing-8;
 }
 
 .InputElement {
   outline: none;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: $spacing-1 solid $off-white;
+  background-color: $bg-white;
   font: inherit;
-  padding: 6px 10px;
+  padding: $spacing-4 $spacing-8;
   display: block;
   width: 100%;
   box-sizing: border-box;
+  border-radius: $border-radius-01;
 }
 
 .InputElement:focus {
   outline: none;
-  background-color: #ccc;
+  background-color: $bg-white;
 }
 
 .Invalid {
-  border: 1px solid red;
-  background-color: #fda49a;
+  border: 1px solid $error;
+  background-color: $error;
 }

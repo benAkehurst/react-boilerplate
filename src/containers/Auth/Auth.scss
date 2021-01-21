@@ -1,14 +1,16 @@
+@import '../../variables.scss';
+
 .Auth {
-  margin: 20px auto;
-  width: 80%;
+  margin: $spacing-24 auto;
+  width: $width-80;
   text-align: center;
-  box-shadow: 0 2px 3px #ccc;
-  border: 1px solid #eee;
-  padding: 10px;
+  box-shadow: $shadow-02;
+  border: $spacing-1 solid $off-white;
+  padding: $spacing-8;
   box-sizing: border-box;
 
   .errorMessage {
-    color: crimson;
+    color: $error;
   }
 }
 

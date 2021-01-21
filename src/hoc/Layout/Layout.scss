@@ -1,4 +1,6 @@
+@import '../../variables.scss';
+
 .Content {
-  margin-top: 4rem;
-  padding: 1rem;
+  margin-top: $spacing-64;
+  padding: $spacing-16;
 }

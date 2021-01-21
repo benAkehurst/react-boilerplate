@@ -1,10 +1,12 @@
+@import '../../../variables.scss';
+
 .Loader,
 .Loader:before,
 .Loader:after {
   border-radius: 50%;
 }
 .Loader {
-  color: #521751;
+  color: $highlight;
   font-size: 11px;
   text-indent: -99999em;
   margin: 55px auto;
