@@ -11,24 +11,22 @@ import axios from '../../axios-instance';
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const tasks = [{ taskString: 'aaa' }];
-  const error = false;
 
-  // const tasks = useSelector((state) => {
-  //   return state.home.tasks;
-  // });
-  // const error = useSelector((state) => state.home.error);
-  // // const isAuthenticated = useSelector((state) => state.auth.token !== null);
-  // const onInitFetchTasks = useCallback(
-  //   () => dispatch(actions.initFetchTasks()),
-  //   [dispatch]
-  // );
-  // // const onSetAuthRedirectPath = (path) =>
-  // //   dispatch(actions.setAuthRedirectPath(path));
+  const tasks = useSelector((state) => {
+    return state.tasks;
+  });
+  const error = useSelector((state) => state.tasks.error);
+  // const isAuthenticated = useSelector((state) => state.auth.token !== null);
+  const onInitFetchTasks = useCallback(
+    () => dispatch(actions.initFetchTasks()),
+    [dispatch]
+  );
+  // const onSetAuthRedirectPath = (path) =>
+  //   dispatch(actions.setAuthRedirectPath(path));
 
-  // useEffect(() => {
-  //   onInitFetchTasks();
-  // }, [onInitFetchTasks]);
+  useEffect(() => {
+    onInitFetchTasks();
+  }, [onInitFetchTasks]);
 
   let taskList = error ? <p>Tasks can't be loaded!</p> : <Spinner />;
 

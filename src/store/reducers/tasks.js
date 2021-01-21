@@ -15,9 +15,9 @@ const addTask = (state, action) => {
 };
 const removeTask = (state, action) => {};
 
-const setTasks = (state, action) => {
+const tasksSuccess = (state, action) => {
   return updateObject(state, {
-    tasks: {},
+    tasks: action.tasks,
     error: false,
   });
 };
@@ -33,7 +33,7 @@ const reducer = (state = initialState, action) => {
     case actionTypes.REMOVE_TASK:
       return removeTask(state, action);
     case actionTypes.SET_TASKS:
-      return setTasks(state, action);
+      return tasksSuccess(state, action);
     case actionTypes.FETCH_TASKS:
       return fetchTasks(state, action);
     case actionTypes.FETCH_TASKS_FAILED:

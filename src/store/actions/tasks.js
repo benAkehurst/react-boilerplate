@@ -23,7 +23,6 @@ export const initFetchTasks = () => {
       axios
         .get(`/api/v1/tasks/${authValid.userId}/${authValid.token}`)
         .then((response) => {
-          console.log('response: ', response);
           dispatch(setTasks(response.data.data));
         })
         .catch((error) => {
