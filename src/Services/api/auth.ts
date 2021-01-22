@@ -4,6 +4,27 @@ import { LoginObject, CreateNewAccountObject } from '../../types/index';
 
 const BASE_URL = 'http://localhost:5000';
 
+export const checkUserLoggedIn = () => {
+  let tokenExists = localStorage.getItem('token');
+  if (!tokenExists) {
+    return false
+  } else if (!checkTokenValid(tokenExists)) {
+    return false
+  } else {
+    return true;
+  }
+}
+
+export const checkTokenValid = (token: string) => {
+  return axios.get(`${BASE_URL}/api/v1/auth/check-token-valid-external/${token}`)
+    .then(response => {
+      return response.data.data.success;
+    })
+    .catch(error => {
+      return error.response;
+    })
+}
+
 export const login = (loginObject: LoginObject) => {
   const loginData = {
     email: loginObject.email,
@@ -15,7 +36,8 @@ export const login = (loginObject: LoginObject) => {
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('uniqueId', response.data.data.uniqueId);
       localStorage.setItem('userFirstName', response.data.data.firstName);
-      return response.data.data;
+
+      return true;
     })
     .catch(error => {
       return error.response;

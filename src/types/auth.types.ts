@@ -1,3 +1,8 @@
+export type AuthProps = {
+  isLogin: boolean,
+  changeAuthForm: () => any;
+}
+
 export type LoginObject = {
   email: string,
   password: string,

@@ -2,7 +2,6 @@ import { Task } from '../../../types';
 import './SingleTask.scss';
 
 const SingleTask = (task: Task) => {
-  console.log('task: ', task);
   return (
     <div className="singleTaskWrapper" key={task.externalId}>
       <section className="singleTaskTask">{task.task}</section>
