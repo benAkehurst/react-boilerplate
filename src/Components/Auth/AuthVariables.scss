@@ -1,1 +1,55 @@
 @import '../../variables.scss';
+
+.FormWrapper {
+  border: 1px solid black;
+  width: 20rem;
+  border-radius: $border-radius-02;
+
+  .Form {
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: $col-padding-01;
+
+    .FormInputGroup {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      margin-top: $spacing-32;
+      width: $width-100;
+
+      .FormInputLabel {
+        font-size: $spacing-32;
+        font-weight: $font-weight-02;
+      }
+
+      .FormInputControl {
+        width: $width-100;
+        height: $spacing-40;
+        font-size: $spacing-32;
+      }
+    }
+    .FormSubmitButton {
+      margin-top: $spacing-16;
+      width: $width-30;
+      height: $spacing-40;
+      border-radius: $button-border-radius;
+      font-weight: $font-weight-02;
+      font-size: 1.5rem;
+    }
+  }
+}
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}

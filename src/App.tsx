@@ -12,7 +12,7 @@ const App = () => {
     if (valid) {
       setIsAuth(true);
     }
-  }, [isAuth]);
+  }, []);
 
   window.addEventListener('UserAuthorised', (e: any) => {
     setIsAuth(true);

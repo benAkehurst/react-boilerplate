@@ -6,7 +6,7 @@ import SignUp from '../../Components/Auth/SignUp/SignUp';
 
 const AuthComponent = (props: AuthProps) => {
   return (
-    <div>
+    <div className="AuthWrapper">
       <h1>{props.isLogin ? 'Login' : 'Sign Up'}</h1>
       {!props.isLogin ? ( // remove this
         <Fragment>
@@ -17,7 +17,10 @@ const AuthComponent = (props: AuthProps) => {
           <SignUp />
         </Fragment>
       )}
-      <button onClick={() => props.changeAuthForm()}>
+      <button
+        onClick={() => props.changeAuthForm()}
+        className="changeFormButton"
+      >
         {!props.isLogin ? 'Go to Login' : 'Go to Sign Up'}
       </button>
     </div>

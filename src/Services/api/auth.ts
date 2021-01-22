@@ -33,11 +33,11 @@ export const login = (loginObject: LoginObject) => {
   }
   return axios.post(`${BASE_URL}/api/v1/auth/login-user`, loginData)
     .then(response => {
+      console.log('response: ', response);
       localStorage.setItem('token', response.data.data.token);
       localStorage.setItem('uniqueId', response.data.data.uniqueId);
       localStorage.setItem('userFirstName', response.data.data.firstName);
-
-      return true;
+      return response;
     })
     .catch(error => {
       return error.response;

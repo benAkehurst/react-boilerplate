@@ -1,13 +1,10 @@
 @import '../../../variables.scss';
 @import '../AuthVariables.scss';
 
-@media all and (min-width: 480px) {
-  .Login {
-    padding: 60px 0;
-  }
+.Login {
+  background-color: $subheader;
+  color: $secondary-color;
+}
 
-  .Login form {
-    margin: 0 auto;
-    max-width: 320px;
-  }
+.LoginButton {
 }
