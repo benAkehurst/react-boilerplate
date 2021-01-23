@@ -18,8 +18,12 @@ const Login = () => {
   function handleSubmit(event: any) {
     event.preventDefault();
     login({ email, password, rememberMe }).then((res) => {
-      if (res.status === 400) {
-        console.log('Login failed: ', res);
+      if (!res) {
+        setIsError(true);
+        setErrorMessage('Server Error');
+      } else if (res.status === 400) {
+        setIsError(true);
+        setErrorMessage(`Login failed - ${res.data.message}`);
       } else if (res.status === 200) {
         let loginSuccess = new CustomEvent('UserAuthorised', {
           detail: res,
