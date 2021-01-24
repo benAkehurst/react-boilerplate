@@ -1,13 +1,16 @@
 import React from 'react';
 import './Home.scss';
-import { HomeProps } from '../../types';
 import Tasks from '../../Components/Tasks/Tasks';
 
-const HomeComponent = (props: HomeProps) => {
+const HomeComponent = () => {
   return (
     <div className="homeWrapper">
-      <h1>Home</h1>
-      <Tasks {...props} />
+      <aside className="pageHeader">
+        <h1>Header</h1>
+      </aside>
+      <aside className="pageContent">
+        <Tasks />
+      </aside>
     </div>
   );
 };

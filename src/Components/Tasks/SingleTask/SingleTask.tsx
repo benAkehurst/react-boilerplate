@@ -1,3 +1,4 @@
+import { deleteSingleTask } from '../../../Services/api';
 import { Task } from '../../../types';
 import './SingleTask.scss';
 
@@ -11,6 +12,11 @@ const SingleTask = (task: Task) => {
       <section className="singleTaskDateTime">
         <span>{task.createdOnDate}</span>
         <span>{task.createdOnTime}</span>
+      </section>
+      <section className="deleteButton">
+        <button onClick={() => deleteSingleTask(task.externalId!)}>
+          Delete
+        </button>
       </section>
     </div>
   );
